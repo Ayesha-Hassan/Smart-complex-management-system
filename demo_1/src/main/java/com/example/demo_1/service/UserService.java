@@ -5,6 +5,7 @@ import com.example.demo_1.mapper.UserMapper;
 import com.example.demo_1.model.Roles;
 import com.example.demo_1.model.User;
 import com.example.demo_1.repository.UserRepository;
+import com.example.demo_1.requestObject.RegisterUserRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,9 @@ public class UserService {
     public UserDto SpecificUser(Long id){
         User user= userRepository.findById(id).orElseThrow();
         return userMapper.toDto(user);
+    }
+    public UserDto RegisterUser(RegisterUserRequest request){
+        User user= userMapper.toEntity(request);
+        return userMapper.toDto(userRepository.save(user));
     }
 }
