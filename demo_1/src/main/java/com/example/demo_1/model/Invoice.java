@@ -26,7 +26,7 @@ public class Invoice {
     @Column(precision = 10,scale = 2)
     private BigDecimal amount;
 
-    private Date issue_date;
+    private Date issueDate;
 
     @Enumerated(EnumType.STRING)
     private InvoiceStatus status;

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Time;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -15,7 +16,7 @@ public class Visitor {
     private Long id;
 
     private String name;
-    private Number contact;
+    private Number cnic;
     private String reason;
 
     @ManyToOne
@@ -25,4 +26,7 @@ public class Visitor {
     private Time entry_time;
     @Column(nullable = true)
     private Time exit_time;
+
+    @Column(nullable = true)
+    private LocalDate entry_date;
 }

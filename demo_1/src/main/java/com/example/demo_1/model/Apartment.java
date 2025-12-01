@@ -16,9 +16,9 @@ public class Apartment {
     @JoinColumn(name= "building_id")
     private Building building;
 
-    private Integer floor_number;
-    private String Unit_Number;
-    private Integer Size_sqft;
+    private Integer floorNumber;
+    private String unitNumber;
+    private Integer sizeSqft;
 
     @Enumerated(EnumType.STRING)
     private Status status;

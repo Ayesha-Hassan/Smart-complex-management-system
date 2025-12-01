@@ -23,5 +23,5 @@ public class Notification {
 
     private Time timestamp;
 
-    private Boolean is_read;
+    private Boolean isRead;
 }

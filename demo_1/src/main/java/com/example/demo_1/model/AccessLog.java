@@ -18,11 +18,7 @@ public class AccessLog {
     @JoinColumn(name = "access_card_id")
     private AccessCard access_card;
 
-    @ManyToOne
-    @JoinColumn(name = "visitor_id",nullable = true)
-    private Visitor visitor;
-
-    private Time entry_time;
+    private Time entryTime;
     @Column(nullable = true)
     private Time exit_time;
 

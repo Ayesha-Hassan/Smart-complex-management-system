@@ -17,6 +17,7 @@ import java.util.List;
 public class UserService {
     private UserRepository userRepository;
     private UserMapper userMapper;
+    private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 
     public List<UserDto> ViewAll() {
         return userRepository.findAll(Sort.by("role")).stream().map(userMapper::toDto).toList();
@@ -27,6 +28,24 @@ public class UserService {
     }
     public UserDto RegisterUser(RegisterUserRequest request){
         User user= userMapper.toEntity(request);
+        // Hash the password before saving
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userMapper.toDto(userRepository.save(user));
+    }
+    public void deleteUser(String email) {
+        userRepository.deleteByEmail(email);
+    }
+    public UserDto getUserByEmail(String email) {
+        User user= userRepository.findByEmail(email).orElseThrow();
+        return userMapper.toDto(user);
+    }
+    
+    public User getUserByEmailEntity(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
+    }
+    
+    public List<UserDto> getUsersByRole(Roles role) {
+        return userRepository.findByRole(role).stream().map(userMapper::toDto).toList();
     }
 }

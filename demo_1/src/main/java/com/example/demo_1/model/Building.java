@@ -14,10 +14,8 @@ public class Building {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private String name;
     private String address;
-    private Integer total_floors;
-    private Integer constructed_years;
+    private Integer totalFloors;
+    private Integer constructedYears;
 
 }

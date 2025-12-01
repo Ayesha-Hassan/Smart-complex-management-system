@@ -10,17 +10,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/users")
 @AllArgsConstructor
 public class UserController {
     private UserService userService;
 
-    @GetMapping
+    @GetMapping("/all")
     List<UserDto> ViewUsers(){
         return userService.ViewAll();
     }
-    @PostMapping
+    @PostMapping("/new")
     UserDto CreateUser(@RequestBody RegisterUserRequest request){
         return userService.RegisterUser(request);
     }
+    
 }

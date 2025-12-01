@@ -19,13 +19,13 @@ public class Payment {
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;
 
-    private Date payment_date;
+    private Date paymentDate;
 
     @Column(precision = 10, scale = 2)
-    private BigDecimal amount_paid;
+    private BigDecimal amountPaid;
 
     @Enumerated(EnumType.STRING)
     private PaymentMethod method;
 
-    private String transaction_ref;
+    private String transactionRef;
 }

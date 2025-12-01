@@ -20,7 +20,7 @@ public class Technician {
     private MaintenanceType specialization;
 
     @Enumerated(EnumType.STRING)
-    private AvailabilityStatus availability_status;
+    private AvailabilityStatus availabilityStatus;
 
     private Integer experience_years;
 }

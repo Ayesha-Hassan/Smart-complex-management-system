@@ -30,7 +30,7 @@ public class MaintenanceRequest {
     @Enumerated(EnumType.STRING)
     private MaintenancePriority priority;
 
-    private Date request_date;
+    private Date requestDate;
     @Column(nullable = true)
     private Date completed_date;
 
