@@ -27,10 +27,32 @@ public class UserService {
         return userMapper.toDto(user);
     }
     public UserDto RegisterUser(RegisterUserRequest request){
-        User user= userMapper.toEntity(request);
+        // Validate that role is provided
+        if (request.getRole() == null) {
+            throw new IllegalArgumentException("Role is required");
+        }
+        
+        // Validate that role is a valid enum value
+        try {
+            Roles.valueOf(request.getRole().name());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid role: " + request.getRole() + ". Must be one of: ADMIN, RESIDENT, GUARD, VISITOR, TECHNICIAN");
+        }
+        
+        User user = userMapper.toEntity(request);
+        
+        // Explicitly set the role to ensure it's not null
+        user.setRole(request.getRole());
+        
         // Hash the password before saving
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userMapper.toDto(userRepository.save(user));
+        
+        User savedUser = userRepository.save(user);
+        
+        // Log for debugging
+        System.out.println("Saved user with role: " + savedUser.getRole());
+        
+        return userMapper.toDto(savedUser);
     }
     public void deleteUser(String email) {
         userRepository.deleteByEmail(email);

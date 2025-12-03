@@ -21,7 +21,13 @@ public class UserController {
     }
     @PostMapping("/new")
     UserDto CreateUser(@RequestBody RegisterUserRequest request){
-        return userService.RegisterUser(request);
+        try {
+            System.out.println("Received request with role: " + request.getRole());
+            return userService.RegisterUser(request);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error creating user: " + e.getMessage());
+            throw e;
+        }
     }
     
 }
