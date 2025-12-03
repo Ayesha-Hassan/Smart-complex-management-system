@@ -21,7 +21,7 @@ public class VisitorController {
      * Register a new visitor and create an entry pass for today.
      */
     @PostMapping("/register")
-    public ResponseEntity<Visitor> registerNewVisitor(@RequestBody Visitor visitor) {
+    public ResponseEntity<Visitor> registerNewVisitor(@RequestBody @jakarta.validation.Valid Visitor visitor) {
         try {
             Visitor registeredVisitor = visitorService.registerNewVisitor(visitor);
             return ResponseEntity.status(HttpStatus.CREATED).body(registeredVisitor);

@@ -45,7 +45,7 @@ public class PaymentController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'RESIDENT')")
-    public ResponseEntity<PaymentDto> processPayment(@RequestBody ProcessPaymentRequest request) {
+    public ResponseEntity<PaymentDto> processPayment(@RequestBody @jakarta.validation.Valid ProcessPaymentRequest request) {
         PaymentDto payment = paymentService.processPayment(request);
         return new ResponseEntity<>(payment, HttpStatus.CREATED);
     }

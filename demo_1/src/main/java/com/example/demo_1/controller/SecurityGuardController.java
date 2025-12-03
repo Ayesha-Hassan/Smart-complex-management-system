@@ -124,7 +124,7 @@ public class SecurityGuardController {
      * Create a new security guard.
      */
     @PostMapping("/new")
-    public ResponseEntity<SecurityGuard> createGuard(@RequestBody SecurityGuard guard) {
+    public ResponseEntity<SecurityGuard> createGuard(@RequestBody @jakarta.validation.Valid SecurityGuard guard) {
         SecurityGuard savedGuard = securityGuardService.saveGuard(guard);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedGuard);
     }
@@ -133,7 +133,7 @@ public class SecurityGuardController {
      * Update an existing security guard.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<SecurityGuard> updateGuard(@PathVariable Long id, @RequestBody SecurityGuard guardDetails) {
+    public ResponseEntity<SecurityGuard> updateGuard(@PathVariable Long id, @RequestBody @jakarta.validation.Valid SecurityGuard guardDetails) {
         SecurityGuard existingGuard = securityGuardService.getGuardById(id);
         if (guardDetails.getName() != null) {
             existingGuard.setName(guardDetails.getName());

@@ -15,10 +15,16 @@ public class Visitor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @jakarta.validation.constraints.NotBlank(message = "Name is required")
     private String name;
+    
+    @jakarta.validation.constraints.NotNull(message = "CNIC is required")
     private Number cnic;
+    
+    @jakarta.validation.constraints.NotBlank(message = "Reason is required")
     private String reason;
 
+    @jakarta.validation.constraints.NotNull(message = "Resident is required")
     @ManyToOne
     @JoinColumn(name="visiting_resident_id")
     private Resident resident;

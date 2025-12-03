@@ -49,7 +49,7 @@ public class InvoiceController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'ACCOUNTANT')")
-    public ResponseEntity<InvoiceDto> createInvoice(@RequestBody CreateInvoiceRequest request) {
+    public ResponseEntity<InvoiceDto> createInvoice(@RequestBody @jakarta.validation.Valid CreateInvoiceRequest request) {
         InvoiceDto createdInvoice = invoiceService.createInvoice(request);
         return new ResponseEntity<>(createdInvoice, HttpStatus.CREATED);
     }

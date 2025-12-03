@@ -20,7 +20,7 @@ public class UserController {
         return userService.ViewAll();
     }
     @PostMapping("/new")
-    UserDto CreateUser(@RequestBody RegisterUserRequest request){
+    UserDto CreateUser(@RequestBody @jakarta.validation.Valid RegisterUserRequest request){
         try {
             System.out.println("Received request with role: " + request.getRole());
             return userService.RegisterUser(request);

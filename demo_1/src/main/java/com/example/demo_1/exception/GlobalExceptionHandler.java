@@ -1,6 +1,7 @@
 package com.example.demo_1.exception;
 
 import com.example.demo_1.dto.ErrorResponse;
+import com.example.demo_1.dto.ValidationErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -95,20 +96,24 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidationException(
+    public ResponseEntity<ValidationErrorResponse> handleValidationException(
             MethodArgumentNotValidException ex, WebRequest request) {
-        String errors = ex.getBindingResult()
-                .getFieldErrors()
-                .stream()
-                .map(error -> error.getField() + ": " + error.getDefaultMessage())
-                .collect(Collectors.joining(", "));
+        org.springframework.validation.BindingResult result = ex.getBindingResult();
+        java.util.List<org.springframework.validation.FieldError> fieldErrors = result.getFieldErrors();
 
-        ErrorResponse errorResponse = new ErrorResponse(
+        java.util.List<ValidationErrorResponse.FieldError> errors = fieldErrors.stream()
+                .map(error -> new ValidationErrorResponse.FieldError(
+                        error.getField(),
+                        error.getRejectedValue(),
+                        error.getDefaultMessage()
+                ))
+                .collect(Collectors.toList());
+
+        ValidationErrorResponse errorResponse = new ValidationErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.BAD_REQUEST.value(),
                 "Validation Failed",
-                errors,
-                request.getDescription(false).replace("uri=", "")
+                errors
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }

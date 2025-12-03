@@ -24,7 +24,7 @@ public class AuthController {
      * Login endpoint - authenticates user and returns JWT token
      */
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> login(@RequestBody @jakarta.validation.Valid LoginRequest loginRequest) {
         try {
             // Find user by email
             User user = userService.getUserByEmailEntity(loginRequest.getEmail());

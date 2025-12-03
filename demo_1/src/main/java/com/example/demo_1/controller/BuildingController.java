@@ -91,7 +91,7 @@ public class BuildingController {
      * Create a new building.
      */
     @PostMapping("/new")
-    public ResponseEntity<Building> createBuilding(@RequestBody Building building) {
+    public ResponseEntity<Building> createBuilding(@RequestBody @jakarta.validation.Valid Building building) {
         try {
             Building savedBuilding = buildingService.saveBuilding(building);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedBuilding);
@@ -106,7 +106,7 @@ public class BuildingController {
     @PutMapping("/{id}")
     public ResponseEntity<Building> updateBuilding(
             @PathVariable Long id,
-            @RequestBody Building buildingDetails) {
+            @RequestBody @jakarta.validation.Valid Building buildingDetails) {
         Building existingBuilding = buildingService.getBuildingById(id);
 
         if (buildingDetails.getAddress() != null && !buildingDetails.getAddress().trim().isEmpty()) {

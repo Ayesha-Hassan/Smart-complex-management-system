@@ -25,7 +25,7 @@ public class EntryPassController {
      * Request body should contain: visitorId, residentId
      */
     @PostMapping("/create")
-    public ResponseEntity<EntryPass> createEntryPass(@RequestBody Map<String, Object> request) {
+    public ResponseEntity<EntryPass> createEntryPass(@RequestBody @jakarta.validation.Valid Map<String, Object> request) {
         try {
             // Extract visitor and resident IDs from request
             Long visitorId = ((Number) request.get("visitorId")).longValue();

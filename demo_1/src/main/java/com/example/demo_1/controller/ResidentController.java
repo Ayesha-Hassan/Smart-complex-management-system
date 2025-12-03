@@ -42,7 +42,7 @@ public class ResidentController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ResidentDto> createResident(@RequestBody CreateResidentRequest request) {
+    public ResponseEntity<ResidentDto> createResident(@RequestBody @jakarta.validation.Valid CreateResidentRequest request) {
         ResidentDto createdResident = residentService.createResident(request);
         return new ResponseEntity<>(createdResident, HttpStatus.CREATED);
     }
@@ -51,7 +51,7 @@ public class ResidentController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ResidentDto> updateResident(
             @PathVariable Long id,
-            @RequestBody UpdateResidentRequest request) {
+            @RequestBody @jakarta.validation.Valid UpdateResidentRequest request) {
         ResidentDto updatedResident = residentService.updateResident(id, request);
         return ResponseEntity.ok(updatedResident);
     }

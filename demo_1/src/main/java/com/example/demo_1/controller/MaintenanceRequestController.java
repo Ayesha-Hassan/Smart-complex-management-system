@@ -57,7 +57,7 @@ public class MaintenanceRequestController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'RESIDENT')")
-    public ResponseEntity<MaintenanceRequestDto> createRequest(@RequestBody CreateMaintenanceRequestRequest request) {
+    public ResponseEntity<MaintenanceRequestDto> createRequest(@RequestBody @jakarta.validation.Valid CreateMaintenanceRequestRequest request) {
         MaintenanceRequestDto createdRequest = maintenanceRequestService.createRequest(request);
         return new ResponseEntity<>(createdRequest, HttpStatus.CREATED);
     }
@@ -66,7 +66,7 @@ public class MaintenanceRequestController {
     @PreAuthorize("hasAnyRole('ADMIN', 'TECHNICIAN')")
     public ResponseEntity<MaintenanceRequestDto> updateRequest(
             @PathVariable Long id,
-            @RequestBody UpdateMaintenanceRequestRequest request) {
+            @RequestBody @jakarta.validation.Valid UpdateMaintenanceRequestRequest request) {
         MaintenanceRequestDto updatedRequest = maintenanceRequestService.updateRequest(id, request);
         return ResponseEntity.ok(updatedRequest);
     }
