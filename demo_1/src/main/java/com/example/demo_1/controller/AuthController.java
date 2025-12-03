@@ -35,17 +35,18 @@ public class AuthController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(new com.example.demo_1.dto.ErrorResponse("Invalid credentials"));
             }
-            System.out.println("hey");
+            System.out.println("hey1");
             // Generate JWT token
+            java.util.Map<String, Object> claims = new java.util.HashMap<>();
+            claims.put("role", java.util.List.of("ROLE_" + user.getRole()));
+            claims.put("id", user.getId().toString());
+            claims.put("name", user.getName());
+            
             String token = jwtTokenProvider.generateTokenWithClaims(
                     user.getEmail(),
-                    java.util.Map.of(
-                            "role", java.util.List.of("ROLE_" + user.getRole()),
-                            "id", user.getId(),
-                            "name", user.getName()
-                    )
+                    claims
             );
-            System.out.println("hey");
+            System.out.println("hey2");
             return ResponseEntity.ok(new LoginResponse(
                     token,
                     user.getName(),
@@ -53,8 +54,10 @@ public class AuthController {
                     user.getRole()
             ));
         } catch (RuntimeException e) {
+            e.printStackTrace();
+            System.out.println("Error during login: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(new com.example.demo_1.dto.ErrorResponse("Invalid email or password"));
+                    .body(new com.example.demo_1.dto.ErrorResponse("Invalid email or password: " + e.getMessage()));
         }
     }
 
