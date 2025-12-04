@@ -39,6 +39,10 @@ public class SecurityConfig {
                         // Public endpoints (no authentication required)
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
+                        .requestMatchers("/docs/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/swagger-ui.html").permitAll()
                         
                         // User endpoints (authenticated users)
                         .requestMatchers(HttpMethod.GET, "/users/**").authenticated()

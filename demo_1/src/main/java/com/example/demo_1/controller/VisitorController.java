@@ -84,7 +84,7 @@ public class VisitorController {
      * Get a visitor by CNIC (national ID number).
      */
     @GetMapping("/by-cnic/{cnic}")
-    public ResponseEntity<Visitor> getVisitorByCnic(@PathVariable Number cnic) {
+    public ResponseEntity<Visitor> getVisitorByCnic(@PathVariable String cnic) {
         Visitor visitor = visitorService.getVisitorByCnic(cnic);
         return ResponseEntity.ok(visitor);
     }

@@ -32,7 +32,7 @@ public interface VisitorRepository extends JpaRepository<Visitor, Long> {
      * Find a visitor by CNIC (national ID number).
      * Uses named query: Visitor.findByCnic
      */
-    Optional<Visitor> findByCnic(Number cnic);
+    Optional<Visitor> findByCnic(String cnic);
 
     /**
      * Find visitors by reason keyword (case-insensitive partial match).

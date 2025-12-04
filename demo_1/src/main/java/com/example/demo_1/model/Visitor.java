@@ -19,7 +19,7 @@ public class Visitor {
     private String name;
     
     @jakarta.validation.constraints.NotNull(message = "CNIC is required")
-    private Number cnic;
+    private String cnic;
     
     @jakarta.validation.constraints.NotBlank(message = "Reason is required")
     private String reason;

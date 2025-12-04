@@ -70,16 +70,16 @@ public class AccessCardService {
         return mapToDto(updatedCard);
     }
 
-    private Number generateCardNumber() {
+    private String generateCardNumber() {
         // Generate a random 8-digit card number
         Random random = new Random();
-        return 10000000 + random.nextInt(90000000);
+        return String.valueOf(10000000 + random.nextInt(90000000));
     }
 
     private AccessCardDto mapToDto(AccessCard accessCard) {
         AccessCardDto dto = new AccessCardDto();
         dto.setId(accessCard.getId());
-        dto.setCardNumber(String.valueOf(accessCard.getCard_number()));
+        dto.setCardNumber(accessCard.getCard_number());
         dto.setIssueDate(accessCard.getIssue_date());
         dto.setExpiryDate(accessCard.getExpiry_date());
         dto.setStatus(accessCard.getStatus());

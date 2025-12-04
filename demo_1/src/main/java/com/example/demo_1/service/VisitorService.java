@@ -73,7 +73,7 @@ public class VisitorService {
     /**
      * Find a visitor by CNIC (national ID number).
      */
-    public Visitor getVisitorByCnic(Number cnic) {
+    public Visitor getVisitorByCnic(String cnic) {
         return visitorRepository.findByCnic(cnic)
                 .orElseThrow(() -> new RuntimeException("Visitor not found with CNIC: " + cnic));
     }

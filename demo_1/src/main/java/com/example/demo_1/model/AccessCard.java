@@ -18,7 +18,7 @@ public class AccessCard {
     @JoinColumn(name="user_id")
     private User user;
 
-    private Number card_number;
+    private String card_number;
     private Date issue_date;
     private Date expiry_date;
 

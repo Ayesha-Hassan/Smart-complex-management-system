@@ -25,5 +25,5 @@ public class Resident {
     private Date move_in_date;
     @Column(nullable = true)
     private Date Move_out_date;
-    private Number emergency_number;
+    private String emergency_number;
 }
